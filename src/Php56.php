@@ -18,6 +18,7 @@ final class Php56 extends Config
             'array_syntax' => [
                 'syntax' => 'short',
             ],
+            'single_line_throw' => false
         ];
 
         return $rules;
