@@ -11,8 +11,8 @@ final class Php72 extends Config
         parent::__construct('Profideo (PHP 7.2)');
 
         $this->setRiskyAllowed(true);
-        // We can allow risky because we add only native_function_invocation risky rule and our applications
-        // do not override native functions.
+        // We can allow risky because we add only native_function_invocation @compiler_optimized risky rule and our
+        // applications do not override these native functions.
         // We cannot allow risky for only this rule for the moment. See
         // https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues/4653.
     }
@@ -25,7 +25,8 @@ final class Php72 extends Config
                 'syntax' => 'short',
             ],
             'single_line_throw' => false,
-            'native_function_invocation' => true,
+            'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
+            // ⤷ Because of https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues/304.
         ];
 
         return $rules;
